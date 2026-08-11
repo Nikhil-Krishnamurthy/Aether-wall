@@ -18,6 +18,7 @@ Icons used in weather by icons8.com
         
 ## [Lamp CAD link](https://cad.onshape.com/documents/8a632808c3a4704098908bdf/w/f551b328146f7b765732a574/e/cafa6fb2468456790b4206dc?renderMode=0&uiState=6a7b85654abcc8d7e086badd)        
 ## [Demo Video](https://youtu.be/3JnITOyHKPw)
+## [Bill of Materials](https://github.com/Nikhil-Krishnamurthy/Aether-wall/blob/main/BOM.csv)        
 ## UI Implementation     
 <img width="4032" height="3024" alt="IMG_2563" src="https://github.com/user-attachments/assets/7e0b861f-0fb4-4050-a092-19a52110dc6b" />     
 <img width="1281" height="721" alt="Screenshot 2026-08-09 154123" src="https://github.com/user-attachments/assets/2b00cbf8-b804-4819-b440-802ed3666194" />           
