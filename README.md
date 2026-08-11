@@ -25,7 +25,7 @@ Icons used in weather by icons8.com
 1 Bottle of acrylic paint     
 1 Tube of super glue      
 1 Lamp electronics     
-###[BOM in csv format](https://github.com/Nikhil-Krishnamurthy/Aether-wall/blob/main/BOM.csv)        
+### [BOM in csv format](https://github.com/Nikhil-Krishnamurthy/Aether-wall/blob/main/BOM.csv)        
 ## UI Implementation     
 <img width="4032" height="3024" alt="IMG_2563" src="https://github.com/user-attachments/assets/7e0b861f-0fb4-4050-a092-19a52110dc6b" />     
 <img width="1281" height="721" alt="Screenshot 2026-08-09 154123" src="https://github.com/user-attachments/assets/2b00cbf8-b804-4819-b440-802ed3666194" />           
