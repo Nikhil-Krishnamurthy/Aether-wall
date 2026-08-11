@@ -23,9 +23,6 @@ import math
 hud = True #controls if the code will create a window for pycharm.
 wifi = False #controls wifi usage for external commands (this needs to be false to run properly)
 
-#Wifi will also skip if server program is not running
-#TODO add scanning to correct variable
-
 morning_items = []
 afternoon_items = []
 evening_items = []
@@ -154,36 +151,34 @@ if hud:
         center = (size // 2, size // 2)
         radius = (size // 2) - 4
 
-        # 1. Clock Face Circle
         pygame.draw.circle(surface, (200, 200, 200), center, radius, 2)
 
-        # 2. Get current time
+       
         now = datetime.datetime.now()
         hour = now.hour % 12
         minute = now.minute
         second = now.second
 
-        # 3. Calculate hand angles (in radians, starting from top/12 o'clock)
+      
         hour_angle = math.radians((hour + minute / 60.0) * 30 - 90)
         minute_angle = math.radians((minute + second / 60.0) * 6 - 90)
         second_angle = math.radians(second * 6 - 90)
 
-        # 4. Draw Hour Hand
         h_x = center[0] + (radius * 0.5) * math.cos(hour_angle)
         h_y = center[1] + (radius * 0.5) * math.sin(hour_angle)
         pygame.draw.line(surface, (255, 255, 255), center, (h_x, h_y), 4)
 
-        # 5. Draw Minute Hand
+   
         m_x = center[0] + (radius * 0.75) * math.cos(minute_angle)
         m_y = center[1] + (radius * 0.75) * math.sin(minute_angle)
         pygame.draw.line(surface, (220, 220, 220), center, (m_x, m_y), 2)
 
-        # 6. Draw Second Hand
+
         s_x = center[0] + (radius * 0.85) * math.cos(second_angle)
         s_y = center[1] + (radius * 0.85) * math.sin(second_angle)
         pygame.draw.line(surface, (220, 50, 50), center, (s_x, s_y), 1)
 
-        # Center Pin
+
         pygame.draw.circle(surface, (255, 255, 255), center, 3)
 
         return surface
@@ -274,12 +269,12 @@ if hud:
 
     font_dict = manager.get_theme().get_font_dictionary()
 
-    # Locate the bundled NotoSans font files inside the installed package
+    
     gui_path = os.path.dirname(pygame_gui.__file__)
     regular_path = os.path.join(gui_path, 'core', 'data', 'NotoSans-Regular.ttf')
     bold_path = os.path.join(gui_path, 'core', 'data', 'NotoSans-Bold.ttf')
 
-    # 1. Register paths for both regular and bold styles
+   
     font_dict.add_font_path('noto_sans', regular_path, bold_path=bold_path)
 
     font_dict.preload_font(
@@ -288,7 +283,7 @@ if hud:
         bold=True
     )
 
-    # 2. Preload your exact font sizes
+   
     font_dict.preload_font(
         font_name='noto_sans',
         font_size=48,
@@ -307,7 +302,7 @@ if hud:
         bold=False
     )
 
-#Load YOLOv8 model (Targeting 'person' class directly at the model level optimizes performance)
+
 model = YOLO("yolov8n.pt")
 
 bulb_queue = queue.Queue(maxsize=1)
@@ -342,7 +337,7 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 
 last_connect_attempt = 0.0
-CONNECT_COOLDOWN = 5.0  # Only try to connect every 5 seconds if disconnected
+CONNECT_COOLDOWN = 5.0  
 
 def handle_wifi_communication():
     global wifi, client_socket, to_write, write_string, to_remove, erase_line
@@ -350,15 +345,15 @@ def handle_wifi_communication():
 
     current_time = counter.perf_counter()
 
-    # 1. Attempt connection with a strict cooldown and low timeout
+   
     if not wifi:
         if current_time - last_connect_attempt < CONNECT_COOLDOWN:
-            return  # Skip network attempt to preserve high camera FPS
+            return 
 
         last_connect_attempt = current_time
         try:
             client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            client_socket.settimeout(0.05)  # Drop timeout to 50ms (prevents UI freeze)
+            client_socket.settimeout(0.05)  
             client_socket.connect(("192.168.5.54", 65432))
             client_socket.setblocking(False)
             wifi = True
@@ -367,7 +362,7 @@ def handle_wifi_communication():
             wifi = False
             return
 
-    # 2. Non-blocking socket receive
+  
     try:
         packet = client_socket.recv(1024)
         if not packet:
@@ -409,7 +404,7 @@ def handle_wifi_communication():
         except Exception:
             pass
         
-#simplified loop for extracting data
+
 def get_slot_weather(hourly_slot: Optional[python_weather.forecast.HourlyForecast]) -> Dict[str, Any]:
     if not hourly_slot:
         return {
@@ -523,10 +518,10 @@ def bulb_worker():
     last_state = None
     while True:
         color = bulb_queue.get()
-        if color is None:  # Shutdown signal
+        if color is None:  
             break
 
-        # Only send the network request if the color actually changed
+        
         if color != last_state:
             try:
                 # If color is (0,0,0), turn the bulb off completely
@@ -544,14 +539,12 @@ def bulb_worker():
 
 
 def detect_objects(frame):
-    # Only run inference on class 0 (person) and use confidence threshold directly in the model
     results = model(frame, classes=[0], conf=0.5, verbose=False)
     person_detected = False
 
     for r in results:
         for box in r.boxes:
             person_detected = True
-            # Draw bounding box
             x1, y1, x2, y2 = map(int, box.xyxy[0])
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.putText(frame, "person", (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
@@ -603,7 +596,6 @@ def update_display_text():
     global hud
     if hud and scan_again:
         load_todo()
-        # Join to do items with HTML line breaks or newlines for UITextEntryBox
         morning_string = "\n".join([f"• {item}" for item in morning_items])
         morning_box.set_text(morning_string)
 
@@ -630,7 +622,7 @@ def main():
     global bulb_on_red, bulb_on_green, bulb_on_blue
 
     last_bulb_update = 0
-    update_interval = 1.0  # Cooldown Tuya requests to once per second
+    update_interval = 1.0 
     last_detection_time = counter.perf_counter()
     shutdown_cooldown = 5.0
 
@@ -664,18 +656,17 @@ def main():
 
         if person_detected:
             last_detection_time = current_time
-            target_color = (bulb_on_red, bulb_on_green, bulb_on_blue)  # Red (or Blue depending on your RGB/BGR mapping)
+            target_color = (bulb_on_red, bulb_on_green, bulb_on_blue)  
         else:
-            # If cooldown has expired, target state is Off
+           
             if current_time - last_detection_time > shutdown_cooldown:
                 target_color = (0, 0, 0)
             else:
-                target_color = current_bulb_state  # Maintain current state during cooldown
-
-            # Check if we need to update the bulb state and if the interval has passed
+                target_color = current_bulb_state  
+           
         if target_color != current_bulb_state and (current_time - last_bulb_update > update_interval):
             try:
-                # Clear out any old message sitting in the queue to keep it fresh
+                
                 while not bulb_queue.empty():
                     try:
                         bulb_queue.get_nowait()
