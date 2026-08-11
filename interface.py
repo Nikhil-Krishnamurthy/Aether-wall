@@ -53,7 +53,6 @@ def handle_network():
          except Exception as e:
              print(f"Server connection error: {e}")
 
-# Accept connections in a background thread so Pygame UI doesn't freeze
 threading.Thread(target=handle_network, daemon=True).start()
 
 def send_data_packet(message: str):
@@ -69,10 +68,9 @@ def send_data_packet(message: str):
                 pass
             conn = None
 
-# Rate-limiting variables (milliseconds)
-last_slider_send = 0
-SEND_INTERVAL_MS = 50  # Max 20 network updates per second while sliding
 
+last_slider_send = 0
+SEND_INTERVAL_MS = 50 
 while running:
     time_delta = clock.tick(60) / 1000.0
     current_time = pygame.time.get_ticks()
@@ -82,7 +80,6 @@ while running:
             running = False
 
         if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
-            # Throttle rapid slider events to prevent socket flooding
             if current_time - last_slider_send > SEND_INTERVAL_MS:
                 val = int(event.value)
                 color_prefix = None
