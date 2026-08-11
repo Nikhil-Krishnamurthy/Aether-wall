@@ -19,12 +19,12 @@ Icons used in weather by icons8.com
 ## [Lamp CAD link](https://cad.onshape.com/documents/8a632808c3a4704098908bdf/w/f551b328146f7b765732a574/e/cafa6fb2468456790b4206dc?renderMode=0&uiState=6a7b85654abcc8d7e086badd)        
 ## [Demo Video](https://youtu.be/3JnITOyHKPw)
 ## Bill of Materials       
-1 Projector (any works)
-2 Feit rgb smart bulb
-1kg of pla of any color
-1 Bottle of acrylic paint
-1 Tube of super glue
-1 Lamp electronics
+1 Projector (any works)      
+2 Feit rgb smart bulb      
+1kg of pla of any color      
+1 Bottle of acrylic paint     
+1 Tube of super glue      
+1 Lamp electronics     
 ###[BOM in csv format](https://github.com/Nikhil-Krishnamurthy/Aether-wall/blob/main/BOM.csv)        
 ## UI Implementation     
 <img width="4032" height="3024" alt="IMG_2563" src="https://github.com/user-attachments/assets/7e0b861f-0fb4-4050-a092-19a52110dc6b" />     
