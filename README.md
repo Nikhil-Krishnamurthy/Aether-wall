@@ -15,7 +15,7 @@ Displays upcoming holidays
 Displays a random odd quote from kanye, ron swanson, or an advice list     
 Weather Icons for most weather situations      
 Icons used in weather by icons8.com      
-<font size = 5>UI Implementation</font>     
+<font size = 1>UI Implementation</font>     
 <img width="4032" height="3024" alt="IMG_2563" src="https://github.com/user-attachments/assets/7e0b861f-0fb4-4050-a092-19a52110dc6b" />     
 <img width="1281" height="721" alt="Screenshot 2026-08-09 154123" src="https://github.com/user-attachments/assets/2b00cbf8-b804-4819-b440-802ed3666194" />     
 ##Interface      
