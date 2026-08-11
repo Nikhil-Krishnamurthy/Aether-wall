@@ -26,5 +26,5 @@ Icons used in weather by icons8.com
 ## Lamp Model           
 <img width="514" height="643" alt="Screenshot 2026-06-18 173255" src="https://github.com/user-attachments/assets/e20dcbf9-4fc5-4c4a-bc16-69fec1f6db35" />                 
        
-##Lamp Implementation            
+## Lamp Implementation            
 <img width="3024" height="4032" alt="IMG_2565" src="https://github.com/user-attachments/assets/408e32e1-0c9b-46c0-b4f1-8a41e67de7b1" />           
